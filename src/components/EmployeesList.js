@@ -19,6 +19,12 @@ export default class EmployeesList extends Component {
 
     deleteEmployee() {
         let i;
+        this.setState({
+            choosedEmp : [],
+            employees : this.state.employees.filter((emp) => {
+                return !this.state.choosedEmp.includes(emp._id)
+            })
+        })
         for (i= 0; i < this.state.choosedEmp.length; i++) {
             axios.delete('http://localhost:5000/delete/' + this.state.choosedEmp[i])
             .then(res => {
@@ -32,6 +38,7 @@ export default class EmployeesList extends Component {
 
     
     componentDidMount() {axios.get('http://localhost:5000/').then(res => {this.setState({employees: res.data})})}
+
 
 
     employeesList() {
@@ -77,7 +84,7 @@ export default class EmployeesList extends Component {
                     </tbody>
                 </table>
                 <button onClick={this.deleteEmployee} className="btn btn-danger">Delete</button>
-                <Link to={"/edit/"+this.state.choosedEmp[0]}><button className="btn btn-primary">Edit</button></Link>
+                <Link to={"/edit/"+this.state.choosedEmp[0]} style={this.state.choosedEmp.length !== 1 ? {"pointerEvents": 'none'} : {}}><button className=" ml-1 btn btn-primary" style={this.state.choosedEmp.length !== 1 ? {"color": 'grey'} : {}}>Edit</button></Link>
             </div>
         )
     }

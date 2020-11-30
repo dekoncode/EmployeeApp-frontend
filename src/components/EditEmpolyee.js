@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 export default class EditEmployee extends Component {
     
@@ -35,8 +36,8 @@ export default class EditEmployee extends Component {
     }
 
     componentDidMount () {
-        //add id
-        axios.get('http://localhost:5000/')
+
+        axios.get('http://localhost:5000/'+ this.props.match.params.id)
         .then(res => {
             this.setState({
                 emp_firstname: res.data.emp_firstname,
@@ -51,10 +52,7 @@ export default class EditEmployee extends Component {
                 emp_role: res.data.emp_role,
                 emp_hourrate: res.data.emp_hourrate
             })
-        .catch(function(error) {
-            console.log(error)
-        })
-        })
+        }).catch(function(error) {console.log(error)})
     }
 
     onChangeEmpFirstName(e) {
@@ -103,6 +101,8 @@ export default class EditEmployee extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        const { history } = this.props;
+        if(history) {history.push('/')};
 
         console.log('Form submited')
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 export default class AddEmployee extends Component {
     
@@ -80,6 +81,8 @@ export default class AddEmployee extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        const { history } = this.props;
+        if(history) {history.push('/')};
 
         console.log('Form submited')
 
