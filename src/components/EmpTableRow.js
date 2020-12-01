@@ -22,7 +22,7 @@ export default class EmpTableRow extends Component {
                     <td>{this.props.employee.emp_location}</td>
                     <td>{this.props.employee.emp_workemail}</td>
                     <td>{this.props.employee.emp_workphone}</td>
-                    <td>{this.props.employee.emp_hourrate}</td>
+                    <td>{this.props.employee.emp_hourrate}/h</td>
                 </tr>
         )
     }

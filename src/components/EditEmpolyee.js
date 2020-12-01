@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom';
 
 export default class EditEmployee extends Component {
     
@@ -101,8 +101,8 @@ export default class EditEmployee extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const { history } = this.props;
-        if(history) {history.push('/')};
+        // const { history } = this.props;
+        // if(history) {history.push('/')};
 
         console.log('Form submited')
 
@@ -120,7 +120,7 @@ export default class EditEmployee extends Component {
             emp_hourrate:this.state.emp_hourrate
         }
 
-        axios.post('http://localhost:5000/add', newEmployee)
+        axios.post('http://localhost:5000/update/'+ this.props.match.params.id, newEmployee)
             .then(res => console.log(res.data))
 
         this.setState({
